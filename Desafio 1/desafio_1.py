@@ -79,7 +79,7 @@ def show_extract(balance, extract):
 
     if extract:
         print()
-        print("Extrato".center(50, "-"))
+        print("Extract".center(50, "-"))
         [print(transaction) for transaction in extract]
         print("".center(50, "-"))
     else:
