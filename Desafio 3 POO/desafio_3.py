@@ -3,7 +3,6 @@ import os
 import time
 import re
 from abc import ABC, abstractmethod
-from datetime import datetime
 
 
 class Client:
@@ -136,7 +135,6 @@ class History:
             {
                 "type": transaction.__class__.__name__,
                 "amount": transaction.amount,
-                "date": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
             }
         )
 
@@ -271,7 +269,7 @@ def show_extract(clients):
         extract = "No transactions have been made."
     else:
         for transaction in transactions:
-            extract += f"\n{transaction['type']}:\t$ {transaction['amount']:.2f}\t  Date:\t{transaction['date']}"
+            extract += f"\n{transaction['type']}:\t$ {transaction['amount']:.2f}"
 
     print(extract)
     print(f"\nBalance:\t$ {account.balance:.2f}")
