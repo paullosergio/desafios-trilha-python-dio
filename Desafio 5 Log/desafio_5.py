@@ -14,7 +14,10 @@ class Client:
         if account.history.day_transactions() < 10:
             transaction.record(account)
         else:
-            print("\nOperation failed! Maximum number of transactions on a day exceeded.")
+            print(
+                "\nOperation failed! "
+                "Maximum number of transactions on a day exceeded."
+            )
 
     def add_account(self, account):
         self.accounts.append(account)
@@ -110,10 +113,14 @@ class CheckingAccount(Account):
         exceeded_withdrawals = number_of_withdrawals >= self._withdrawal_limit
 
         if exceeded_limit:
-            print("\nOperation failed! The withdrawal amount exceeds the limit.")
+            print(
+                "\nOperation failed! The withdrawal amount exceeds the limit."
+            )
 
         elif exceeded_withdrawals:
-            print("\nOperation failed! Maximum number of withdrawals exceeded.")
+            print(
+                "\nOperation failed! Maximum number of withdrawals exceeded."
+            )
 
         else:
             return super().withdraw(amount)
@@ -121,7 +128,8 @@ class CheckingAccount(Account):
         return False
 
     def __repr__(self) -> str:
-        return f"""<{self.__class__.__name__}: ('{self.branch}', '{self.number}', '{self.client.name}>'"""
+        return f"""<{self.__class__.__name__}: ('{self.branch}',
+        '{self.number}', '{self.client.name}>'"""
 
     def __str__(self):
         return f"""
@@ -196,14 +204,15 @@ class Deposit(Transaction):
             account.history.add_transaction(self)
 
 
-
-
 def log_transaction(func):
     def create_log(*args, **kwargs):
         result = func(*args, **kwargs)
+        date_hour = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
         with open("Desafio 5 Log/log.txt", "a", encoding="UTF-8") as file:
-            file.write(f"[{datetime.now().strftime("%d-%m-%Y %H:%M:%S")}] "
-                       f"Function: '{func.__name__}' executed with the args {args}.\n")
+            file.write(
+                f"[{date_hour}] "
+                f"Function: '{func.__name__}' executed with the args {args}.\n"
+            )
         return result
 
     return create_log
@@ -310,8 +319,9 @@ def create_client(clients):
         "Enter the address (street, number - neighborhood - city/state): "
     )
 
-    client = Individual(name=name, birth_date=birth_date,
-                        cpf=cpf, address=address)
+    client = Individual(
+        name=name, birth_date=birth_date, cpf=cpf, address=address
+    )
     clients.append(client)
     print("\nClient created successfully!")
 
@@ -346,6 +356,7 @@ def valid_cpf(cpf):
         return
     return True
 
+
 def filter_client(cpf, clients):
     return next((client for client in clients if client.cpf == cpf), None)
 
@@ -369,6 +380,7 @@ def retrieve_client_account(client):
     except ValueError:
         print("Invalid number account.")
         return
+
 
 def menu():
     menu = (
@@ -420,7 +432,10 @@ def main():
             break
 
         else:
-            print("\nInvalid operation, please select the desired operation again. ")
+            print(
+                "\nInvalid operation, "
+                "please select the desired operation again. "
+            )
         time.sleep(5)
 
 
